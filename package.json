@@ -1,0 +1,17 @@
+{
+  "name": "sports-registration-system",
+  "version": "1.0.0",
+  "description": "A basic registration system for sports users with sign in/sign up and profile editing",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 3000 -o",
+    "dev": "npx live-server --port=3000"
+  },
+  "keywords": ["sports", "registration", "user-management", "signup", "signin"],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}

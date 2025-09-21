@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI Assessment - Sports Authority of India</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Mobile App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="SAI Assessment">
+    <meta name="application-name" content="SAI Assessment">
+    <meta name="theme-color" content="#6366F1">
+    <meta name="msapplication-navbutton-color" content="#6366F1">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- iOS Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180x180.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="icons/icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="icons/icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="icons/icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="icons/icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="57x57" href="icons/icon-57x57.png">
+    
+    <!-- Android Icons -->
+    <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512x512.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/icon-16x16.png">
+</head>
+<body>
+    <!-- Mobile App Container -->
+    <div class="mobile-app">
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-left">
+                <span class="time" id="currentTime">9:41</span>
+            </div>
+            <div class="status-right">
+                <i class="fas fa-signal"></i>
+                <i class="fas fa-wifi"></i>
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+        </div>
+
+        <!-- App Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-left">
+                    <div class="app-logo">
+                        <div class="logo-icon">🏅</div>
+                        <div class="logo-text">
+                            <h1>SAI Assessment</h1>
+                            <p>Sports Authority of India</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <div class="profile-avatar" id="profileAvatar" onclick="toggleProfileMenu()">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="profile-menu" id="profileMenu" style="display: none;">
+                            <div class="menu-item" onclick="window.sportsApp.showDashboard()">
+                                <i class="fas fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
+                            </div>
+                            <div class="menu-item" onclick="window.sportsApp.showEditProfile()">
+                                <i class="fas fa-user-edit"></i>
+                                <span>Edit Profile</span>
+                            </div>
+                            <div class="menu-item" onclick="window.sportsApp.logout()">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auth-buttons" id="authButtons">
+                        <button class="btn-icon" onclick="window.sportsApp.showSignIn()">
+                            <i class="fas fa-sign-in-alt"></i>
+                        </button>
+                        <button class="btn-icon primary" onclick="window.sportsApp.showSignUp()">
+                            <i class="fas fa-user-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="app-main">
+            <!-- Welcome Section -->
+            <section class="welcome-section" id="welcomeSection">
+                <div class="welcome-content">
+                    <div class="welcome-hero">
+                        <div class="hero-icon">🏆</div>
+                        <h1>Welcome to SAI Assessment</h1>
+                        <p>Official Sports Authority of India Talent Assessment Portal</p>
+                        <div class="hero-features">
+                            <div class="feature-item">
+                                <i class="fas fa-video"></i>
+                                <span>AI-Powered Analysis</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Secure & Verified</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-trophy"></i>
+                                <span>National Rankings</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="welcome-actions">
+                        <button class="btn-primary" onclick="window.sportsApp.showSignUp()">
+                            <i class="fas fa-rocket"></i>
+                            Get Started
+                        </button>
+                        <button class="btn-outline" onclick="window.sportsApp.showSignIn()">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sign Up Section -->
+            <section class="auth-section" id="signUpSection" style="display: none;">
+                <div class="auth-container">
+                    <div class="auth-header">
+                        <button class="back-btn" onclick="window.sportsApp.showWelcome()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h2>Create Account</h2>
+                        <p>Join thousands of athletes nationwide</p>
+                    </div>
+                    <form class="auth-form" id="signUpForm">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="signUpName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="signUpEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="signUpPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="signUpAge" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="signUpGender" required>
+                                <option value="">Select Gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="signUpHeight" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="signUpWeight" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="signUpPassword" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            Create Account
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Sign In Section -->
+            <section class="auth-section" id="signInSection" style="display: none;">
+                <div class="auth-container">
+                    <div class="auth-header">
+                        <button class="back-btn" onclick="window.sportsApp.showWelcome()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to continue your assessment</p>
+                    </div>
+                    <form class="auth-form" id="signInForm">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="signInEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="signInPassword" required>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-sign-in-alt"></i>
+                            Sign In
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section class="dashboard-section" id="dashboardSection" style="display: none;">
+                <div class="dashboard-header">
+                    <div class="welcome-message">
+                        <h2>Welcome back, <span id="dashboardName">User</span>!</h2>
+                        <p>Ready for your next assessment?</p>
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn-icon" onclick="window.sportsApp.showEditProfile()">
+                            <i class="fas fa-user-edit"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="completedTests">0</h3>
+                            <p>Tests Completed</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="userRank">-</h3>
+                            <p>National Rank</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="badgesEarned">0</h3>
+                            <p>Badges Earned</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h3>Quick Actions</h3>
+                    <div class="action-grid">
+                        <button class="action-card" onclick="window.sportsApp.showTests()">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Start Test</span>
+                        </button>
+                        <button class="action-card" onclick="window.sportsApp.showLeaderboard()">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Leaderboard</span>
+                        </button>
+                        <button class="action-card" onclick="window.sportsApp.showProgress()">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Progress</span>
+                        </button>
+                        <button class="action-card" onclick="window.sportsApp.showResults()">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Results</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tests Section -->
+            <section class="tests-section" id="testsSection" style="display: none;">
+                <div class="section-header">
+                    <button class="back-btn" onclick="window.sportsApp.showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Fitness Tests</h2>
+                    <p>Choose a test to begin your assessment</p>
+                </div>
+
+                <div class="test-grid">
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('height')">
+                        <div class="test-icon">
+                            <i class="fas fa-ruler-vertical"></i>
+                        </div>
+                        <h3>Height Measurement</h3>
+                        <p>Stand against wall for height measurement</p>
+                        <div class="test-meta">
+                            <span class="duration">2 min</span>
+                            <span class="difficulty">Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('weight')">
+                        <div class="test-icon">
+                            <i class="fas fa-weight"></i>
+                        </div>
+                        <h3>Weight Measurement</h3>
+                        <p>Step on scale for weight measurement</p>
+                        <div class="test-meta">
+                            <span class="duration">1 min</span>
+                            <span class="difficulty">Easy</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('sitAndReach')">
+                        <div class="test-icon">
+                            <i class="fas fa-hand-paper"></i>
+                        </div>
+                        <h3>Sit & Reach</h3>
+                        <p>Flexibility test with reaching motion</p>
+                        <div class="test-meta">
+                            <span class="duration">3 min</span>
+                            <span class="difficulty">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('verticalJump')">
+                        <div class="test-icon">
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <h3>Vertical Jump</h3>
+                        <p>Jump as high as possible from standing</p>
+                        <div class="test-meta">
+                            <span class="duration">5 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('broadJump')">
+                        <div class="test-icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <h3>Broad Jump</h3>
+                        <p>Jump as far as possible from standing</p>
+                        <div class="test-meta">
+                            <span class="duration">5 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('medicineBall')">
+                        <div class="test-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3>Medicine Ball Throw</h3>
+                        <p>Throw medicine ball for distance</p>
+                        <div class="test-meta">
+                            <span class="duration">5 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('sprint30m')">
+                        <div class="test-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>30m Sprint</h3>
+                        <p>Run 30 meters as fast as possible</p>
+                        <div class="test-meta">
+                            <span class="duration">5 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('shuttleRun')">
+                        <div class="test-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Shuttle Run</h3>
+                        <p>Run back and forth between markers</p>
+                        <div class="test-meta">
+                            <span class="duration">5 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('sitUps')">
+                        <div class="test-icon">
+                            <i class="fas fa-dumbbell"></i>
+                        </div>
+                        <h3>Sit-ups</h3>
+                        <p>Complete as many sit-ups as possible</p>
+                        <div class="test-meta">
+                            <span class="duration">3 min</span>
+                            <span class="difficulty">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="test-card" onclick="window.sportsApp.showVideoRecording('enduranceRun')">
+                        <div class="test-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <h3>Endurance Run</h3>
+                        <p>Run 800m for time</p>
+                        <div class="test-meta">
+                            <span class="duration">10 min</span>
+                            <span class="difficulty">Hard</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Video Recording Section -->
+            <section class="video-section" id="videoSection" style="display: none;">
+                <div class="video-container">
+                    <div class="video-header">
+                        <button class="back-btn" onclick="window.sportsApp.showTests()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h2 id="testTitle">Test Recording</h2>
+                        <div class="test-info">
+                            <span id="testDuration">5 min</span>
+                            <span id="testDifficulty">Medium</span>
+                        </div>
+                    </div>
+
+                    <div class="video-recorder">
+                        <div class="video-preview" id="videoPreview">
+                            <video id="videoElement" autoplay muted playsinline></video>
+                            <div class="recording-overlay" id="recordingOverlay" style="display: none;">
+                                <div class="recording-indicator">
+                                    <div class="recording-dot"></div>
+                                    <span>Recording...</span>
+                                </div>
+                                <div class="recording-timer" id="recordingTimer">00:00</div>
+                            </div>
+                            <div class="video-quality-indicator" id="videoQualityIndicator">
+                                <i class="fas fa-video"></i>
+                                <span>HD Ready</span>
+                            </div>
+                            <div class="ai-analysis-overlay" id="aiAnalysisOverlay" style="display: none;">
+                                <div class="analysis-progress">
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="analysisProgress"></div>
+                                    </div>
+                                    <span id="analysisStatus">Analyzing...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="test-instructions" id="testInstructions">
+                            <h3>Instructions</h3>
+                            <p id="instructionText">Follow the on-screen instructions carefully.</p>
+                        </div>
+
+                        <div class="video-controls">
+                            <button class="btn-primary" id="startRecordingBtn">
+                                <i class="fas fa-video"></i>
+                                Start Recording
+                            </button>
+                            <button class="btn-danger" id="stopRecordingBtn" style="display: none;">
+                                <i class="fas fa-stop"></i>
+                                Stop Recording
+                            </button>
+                            <button class="btn-outline" id="retakeBtn" style="display: none;">
+                                <i class="fas fa-redo"></i>
+                                Retake
+                            </button>
+                            <button class="btn-success" id="uploadBtn" style="display: none;">
+                                <i class="fas fa-upload"></i>
+                                Upload & Analyze
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <div class="results-container">
+                    <div class="results-header">
+                        <button class="back-btn" onclick="window.sportsApp.showTests()">
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                        <h2>Test Results</h2>
+                    </div>
+
+                    <div class="result-content">
+                        <div class="result-video">
+                            <video id="resultVideo" controls></video>
+                        </div>
+                        <div class="result-details">
+                            <div class="result-score">
+                                <div class="score-circle">
+                                    <div class="score-number" id="scoreNumber">85</div>
+                                    <div class="score-label">Score</div>
+                                </div>
+                            </div>
+                            <div class="result-status" id="resultStatus">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Test Completed Successfully</span>
+                            </div>
+                            <div class="result-actions">
+                                <button class="btn-primary" onclick="window.sportsApp.showTests()">
+                                    <i class="fas fa-play"></i>
+                                    Take Another Test
+                                </button>
+                                <button class="btn-outline" onclick="window.sportsApp.showDashboard()">
+                                    <i class="fas fa-home"></i>
+                                    Dashboard
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ai-analysis" id="aiAnalysis">
+                        <h3>AI Analysis Results</h3>
+                        <div class="analysis-results" id="analysisResults">
+                            <!-- Dynamic content -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leaderboard Section -->
+            <section class="leaderboard-section" id="leaderboardSection" style="display: none;">
+                <div class="section-header">
+                    <button class="back-btn" onclick="window.sportsApp.showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>National Rankings</h2>
+                    <p>See how you compare with athletes nationwide</p>
+                </div>
+
+                <div class="leaderboard">
+                    <div class="leaderboard-header">
+                        <div class="rank">Rank</div>
+                        <div class="name">Athlete</div>
+                        <div class="score">Score</div>
+                        <div class="tests">Tests</div>
+                    </div>
+                    <div class="leaderboard-content" id="leaderboardContent">
+                        <!-- Dynamic content -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Edit Profile Section -->
+            <section class="edit-profile-section" id="editProfileSection" style="display: none;">
+                <div class="section-header">
+                    <button class="back-btn" onclick="window.sportsApp.showDashboard()">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2>Edit Profile</h2>
+                    <p>Update your personal information</p>
+                </div>
+
+                <div class="profile-form">
+                    <form id="editProfileForm">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <input type="text" id="editName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="editEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="tel" id="editPhone" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input type="number" id="editAge" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Gender</label>
+                            <select id="editGender" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Height (cm)</label>
+                                <input type="number" id="editHeight" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Weight (kg)</label>
+                                <input type="number" id="editWeight" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-save"></i>
+                            Save Changes
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav" id="bottomNav" style="display: none;">
+            <button class="nav-item active" onclick="window.sportsApp.showDashboard()">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </button>
+            <button class="nav-item" onclick="window.sportsApp.showTests()">
+                <i class="fas fa-play-circle"></i>
+                <span>Tests</span>
+            </button>
+            <button class="nav-item" onclick="window.sportsApp.showLeaderboard()">
+                <i class="fas fa-trophy"></i>
+                <span>Rankings</span>
+            </button>
+            <button class="nav-item" onclick="window.sportsApp.showProfile()">
+                <i class="fas fa-user"></i>
+                <span>Profile</span>
+            </button>
+        </nav>
+
+        <!-- Notifications -->
+        <div class="notification" id="notification" style="display: none;">
+            <div class="notification-content">
+                <i class="fas fa-check-circle"></i>
+                <span id="notificationMessage">Success!</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Update time
+        function updateTime() {
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { 
+                hour: 'numeric', 
+                minute: '2-digit',
+                hour12: false 
+            });
+            document.getElementById('currentTime').textContent = time;
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+
+        // Toggle profile menu
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Close profile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const profile = document.getElementById('userProfile');
+            const menu = document.getElementById('profileMenu');
+            if (!profile.contains(event.target)) {
+                menu.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
